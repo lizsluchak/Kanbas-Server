@@ -37,5 +37,16 @@ export default function WorkingWithObjects(app) {
         res.json(module); //use .json instead of .send if you know the response is formatted as JSON
     });
 
+    //route that retrieve name of module object
+    app.get("/lab5/module/name", (req, res) => {
+        res.json(module.title);
+    });
+
+    app.get("/lab5/module/name/:newName", (req, res) => {
+        const { newName } = req.params; //object in server
+        module.name = newName; //persists as long as server is running
+        res.json(module);
+    });
+
 
 };
