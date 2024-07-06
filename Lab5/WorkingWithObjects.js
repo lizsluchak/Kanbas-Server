@@ -32,6 +32,13 @@ export default function WorkingWithObjects(app) {
         res.json(assignment);
     });
 
+    //modify assignment score
+    app.get("/lab5/assignment/score/:newScore", (req, res) => {
+        const { newScore } = req.params; //object in server
+        assignment.score = newScore; //persists as long as server is running
+        res.json(assignment);
+    });
+
     //route that response with module object, mapped to /lab5/module
     app.get("/lab5/module", (req, res) => {
         res.json(module); //use .json instead of .send if you know the response is formatted as JSON
@@ -42,11 +49,14 @@ export default function WorkingWithObjects(app) {
         res.json(module.title);
     });
 
+    //route to edit name
     app.get("/lab5/module/name/:newName", (req, res) => {
         const { newName } = req.params; //object in server
         module.name = newName; //persists as long as server is running
         res.json(module);
     });
+
+
 
 
 };
