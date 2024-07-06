@@ -8,6 +8,7 @@
 
 import PathParameters from "./PathParameters.js";
 import QueryParameters from "./QueryParameters.js";
+import WorkingWithObjects from "./WorkingWithObjects.js";
 
 
 
@@ -18,6 +19,7 @@ const Lab5 = (app) => {
     });
     PathParameters(app);
     QueryParameters(app);
+    WorkingWithObjects(app);
 
 };
 export default Lab5;
