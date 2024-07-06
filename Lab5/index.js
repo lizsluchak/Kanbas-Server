@@ -6,7 +6,7 @@
  * @param {*} app app reference to express module
  */
 const Lab5 = (app) => {
-    app.get("/a5/welcome", (req, res) => {
+    app.get("/Lab5/welcome", (req, res) => {
         res.send("Welcome to Lab 5");
     });
 

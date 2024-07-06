@@ -16,4 +16,4 @@ Hello(app);  //pass app reference to Hello function
 Lab5(app); 	
 
 
-app.listen(4000)
+app.listen(process.env.PORT || 4000)
