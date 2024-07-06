@@ -6,11 +6,14 @@
  */
 // const express = require('express') //require == import, and loads a library into local source
 
-import express from 'express'; 
+import express from "express";
 import Hello from "./Hello.js";
+import Lab5 from "./Lab5/index.js" //import lab5
 
-const app = express() //create new express library instance and assigns it to app
-Hello(app)  //pass app reference to Hello function 
+const app = express();
+app.use(express.json()); //create new express library instance and assigns it to app
+Hello(app);  //pass app reference to Hello function
+Lab5(app); 	
 
 
 app.listen(4000)
