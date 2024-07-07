@@ -66,7 +66,7 @@ export default function WorkingWithArrays(app) {
       });
 
       /**
-       * Update Data:
+       * Update Data in Arrays:
        * convention = encode ID of item to update as path param as shown below, 
        * we search for the item in the set of items and update it; typically
        * respond with status of success/failure but responding with all todos for now
@@ -75,6 +75,32 @@ export default function WorkingWithArrays(app) {
         const { id, title } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
         todo.title = title;
+        res.json(todos);
+      });
+
+      /**
+       * Update Data: completed
+       * convention = encode ID of item to update as path param as shown below, 
+       * we search for the item in the set of items and update it; typically
+       * respond with status of success/failure but responding with all todos for now
+       */
+      app.get("/lab5/todos/:id/completed/:completed", (req, res) => {
+        const { id, completed } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.completed = completed;
+        res.json(todos);
+      });
+
+      /**
+       * Update Data: description
+       * convention = encode ID of item to update as path param as shown below, 
+       * we search for the item in the set of items and update it; typically
+       * respond with status of success/failure but responding with all todos for now
+       */
+      app.get("/lab5/todos/:id/description/:description", (req, res) => {
+        const { id, description } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.description = description;
         res.json(todos);
       });
     
