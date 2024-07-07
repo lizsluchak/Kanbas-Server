@@ -65,6 +65,14 @@ export default function WorkingWithObjects(app) {
         res.json(module);
     });
 
+    app.get("/lab5/module/description/:newDescription", (req, res) => {
+        const { newDescription } = req.params; //object in server
+        assignment.description= newDescription; //persists as long as server is running
+        res.json(assignment);
+    });
+
+
+
 
 
 
