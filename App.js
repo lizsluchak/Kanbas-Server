@@ -9,11 +9,14 @@
 import express from "express";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js" //import lab5
+import cors from "cors";
 
 const app = express();
-app.use(express.json()); //create new express library instance and assigns it to app
-Hello(app);  //pass app reference to Hello function
+app.use(cors());
 Lab5(app); 	
+// app.use(express.json()); //create new express library instance and assigns it to app
+Hello(app);  //pass app reference to Hello function
+
 
 
 app.listen(process.env.PORT || 4000)
