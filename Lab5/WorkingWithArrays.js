@@ -53,4 +53,31 @@ export default function WorkingWithArrays(app) {
         res.json(todo);
     });
 
+
+    /** 
+     * route that parses id to delete, passed as path param, respond with all items, 
+     * more comomon to respond with success/failure
+     */
+    app.get("/lab5/todos/:id/delete", (req, res) => {
+        const { id } = req.params;
+        const todoIndex = todos.findIndex((t) => t.id === parseInt(id));
+        todos.splice(todoIndex, 1); //start index; number of items to delete
+        res.json(todos);
+      });
+
+      /**
+       * Update Data:
+       * convention = encode ID of item to update as path param as shown below, 
+       * we search for the item in the set of items and update it; typically
+       * respond with status of success/failure but responding with all todos for now
+       */
+      app.get("/lab5/todos/:id/title/:title", (req, res) => {
+        const { id, title } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.title = title;
+        res.json(todos);
+      });
+    
+    
+
 };
