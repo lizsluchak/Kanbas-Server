@@ -39,6 +39,15 @@ export default function WorkingWithObjects(app) {
         res.json(assignment);
     });
 
+    //modify assignment completeion 
+    app.get("/lab5/assignment/completed/:newStatus", (req, res) => {
+        const { newStatus } = req.params; //object in server
+        assignment.completed = newStatus; //persists as long as server is running
+        res.json(assignment);
+    });
+
+
+
     //route that response with module object, mapped to /lab5/module
     app.get("/lab5/module", (req, res) => {
         res.json(module); //use .json instead of .send if you know the response is formatted as JSON
