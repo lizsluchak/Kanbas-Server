@@ -11,7 +11,7 @@ export default function WorkingWithArrays(app) {
     /** route to retrieve array */
     app.get("/lab5/todos", (req, res) => {
 
-        {/** handles case when we want to filter by completed query param */}
+        {/** handles case when we want to filter by completed query param */ }
         const { completed } = req.query;
         if (completed !== undefined) {
             // === is strict equality operator, compares value and type of variables on both sides
@@ -37,13 +37,13 @@ export default function WorkingWithArrays(app) {
      */
     app.get("/lab5/todos/create", (req, res) => {
         const newTodo = {
-          id: new Date().getTime(),
-          title: "New Task",
-          completed: false,
+            id: new Date().getTime(),
+            title: "New Task",
+            completed: false,
         };
         todos.push(newTodo);
         res.json(todos);
-      });
+    });
 
     /**
      * starting to implement correct HTTP methods, post takes place of above, 
@@ -51,14 +51,14 @@ export default function WorkingWithArrays(app) {
      */
     app.post("/lab5/todos", (req, res) => {
         //grabs posted JSON data from req.body and uses it to define new todo
-        const newTodo = { ...req.body,  id: new Date().getTime() };
+        const newTodo = { ...req.body, id: new Date().getTime() };
         todos.push(newTodo);
         //this version only responds with new todo, not entire todo array
         res.json(newTodo);
-      });
-    
-    
-    
+    });
+
+
+
 
     /** route that parses id passed as path param,  finds item, responds with item */
     app.get("/lab5/todos/:id", (req, res) => {
@@ -81,15 +81,22 @@ export default function WorkingWithArrays(app) {
      */
     app.put("/lab5/todos/:id", (req, res) => {
         const { id } = req.params;
+        const todoIndex = todos.findIndex((t) => t.id === parseInt(id));
+        //error handling
+        if (todoIndex === -1) {
+            res.status(404).json({ message: `Unable to update Todo with ID ${id}` });
+            return;
+        }
+
         todos = todos.map((t) => {
-          if (t.id === parseInt(id)) {
-            return { ...t, ...req.body };
-          }
-          return t;
+            if (t.id === parseInt(id)) {
+                return { ...t, ...req.body };
+            }
+            return t;
         });
         res.sendStatus(200);
-      });
-    
+    });
+
 
 
     /** 
@@ -101,68 +108,74 @@ export default function WorkingWithArrays(app) {
         const todoIndex = todos.findIndex((t) => t.id === parseInt(id));
         todos.splice(todoIndex, 1); //start index; number of items to delete
         res.json(todos);
-      });
+    });
 
-      /**
-       * reimplementing delete using app.delete instead of app.get
-       * The HTTP DELETE method is specifically suited for removing data from 
-       * remote servers. In the server project, implement a better version of 
-       * the delete operation as shown below. The new implementation uses the 
-       * HTTP DELETE method declared in app.delete() which is distinct from 
-       * app.get() for which we don't need the trailing /delete at the end of 
-       * the URL. Removing the element from the array is the same either way. 
-       * Although we could again respond with the entire array of surviving 
-       * todos, it is better to just respond with a success status and let
-       *  the user interface update its state variable. This reduces unnecessary
-       *  data communication between the client and server.
-       */
-      app.delete("/lab5/todos/:id", (req, res) => {
+    /**
+     * reimplementing delete using app.delete instead of app.get
+     * The HTTP DELETE method is specifically suited for removing data from 
+     * remote servers. In the server project, implement a better version of 
+     * the delete operation as shown below. The new implementation uses the 
+     * HTTP DELETE method declared in app.delete() which is distinct from 
+     * app.get() for which we don't need the trailing /delete at the end of 
+     * the URL. Removing the element from the array is the same either way. 
+     * Although we could again respond with the entire array of surviving 
+     * todos, it is better to just respond with a success status and let
+     *  the user interface update its state variable. This reduces unnecessary
+     *  data communication between the client and server.
+     */
+    app.delete("/lab5/todos/:id", (req, res) => {
         const { id } = req.params;
         const todoIndex = todos.findIndex((t) => t.id === parseInt(id));
+        //error handling 
+        if (todoIndex === -1) {
+            res.status(404).json({ message: `Unable to delete Todo with ID ${id}` });
+            return;
+        }
+
         todos.splice(todoIndex, 1);
         res.sendStatus(200);
-      });
-    
+    });
 
-      /**
-       * Update Data in Arrays:
-       * convention = encode ID of item to update as path param as shown below, 
-       * we search for the item in the set of items and update it; typically
-       * respond with status of success/failure but responding with all todos for now
-       */
-      app.get("/lab5/todos/:id/title/:title", (req, res) => {
+
+    /**
+     * Update Data in Arrays:
+     * convention = encode ID of item to update as path param as shown below, 
+     * we search for the item in the set of items and update it; typically
+     * respond with status of success/failure but responding with all todos for now
+     */
+    app.get("/lab5/todos/:id/title/:title", (req, res) => {
         const { id, title } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
         todo.title = title;
         res.json(todos);
-      });
+    });
 
-      /**
-       * Update Data: completed
-       * convention = encode ID of item to update as path param as shown below, 
-       * we search for the item in the set of items and update it; typically
-       * respond with status of success/failure but responding with all todos for now
-       */
-      app.get("/lab5/todos/:id/completed/:completed", (req, res) => {
+    /**
+     * Update Data: completed
+     * convention = encode ID of item to update as path param as shown below, 
+     * we search for the item in the set of items and update it; typically
+     * respond with status of success/failure but responding with all todos for now
+     */
+    app.get("/lab5/todos/:id/completed/:completed", (req, res) => {
         const { id, completed } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
         todo.completed = completed;
         res.json(todos);
-      });
+    });
 
-      /**
-       * Update Data: description
-       * convention = encode ID of item to update as path param as shown below, 
-       * we search for the item in the set of items and update it; typically
-       * respond with status of success/failure but responding with all todos for now
-       */
-      app.get("/lab5/todos/:id/description/:description", (req, res) => {
+    /**
+     * Update Data: description
+     * convention = encode ID of item to update as path param as shown below, 
+     * we search for the item in the set of items and update it; typically
+     * respond with status of success/failure but responding with all todos for now
+     */
+    app.get("/lab5/todos/:id/description/:description", (req, res) => {
         const { id, description } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
         todo.description = description;
         res.json(todos);
-      });
-    
-    
+    });
+
+
 
 };
