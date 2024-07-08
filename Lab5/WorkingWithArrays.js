@@ -44,6 +44,20 @@ export default function WorkingWithArrays(app) {
         todos.push(newTodo);
         res.json(todos);
       });
+
+    /**
+     * starting to implement correct HTTP methods, post takes place of above, 
+     * should use post to create new todos
+     */
+    app.post("/lab5/todos", (req, res) => {
+        //grabs posted JSON data from req.body and uses it to define new todo
+        const newTodo = { ...req.body,  id: new Date().getTime() };
+        todos.push(newTodo);
+        //this version only responds with new todo, not entire todo array
+        res.json(newTodo);
+      });
+    
+    
     
 
     /** route that parses id passed as path param,  finds item, responds with item */
