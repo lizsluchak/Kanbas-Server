@@ -67,6 +67,30 @@ export default function WorkingWithArrays(app) {
         res.json(todo);
     });
 
+    /**
+     * Use HTTP PUT to reimplement the route that updates an item in an array 
+     * as shown below. The route replaces the todo item whose ID matches the 
+     * id path parameter with a combination of the original todo object and 
+     * properties in the req.body. This overrides any properties in the 
+     * original todo object with matching properties in the req.body. Note 
+     * that this new implementation does not respond with the todos array, 
+     * but instead responds with a simple OK status code of 200. This is more 
+     * reasonable since there is no need to respond with an entire array since 
+     * the user interface already has the array cached in the browser and it 
+     * can just update the item in the todos state variable.
+     */
+    app.put("/lab5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        todos = todos.map((t) => {
+          if (t.id === parseInt(id)) {
+            return { ...t, ...req.body };
+          }
+          return t;
+        });
+        res.sendStatus(200);
+      });
+    
+
 
     /** 
      * route that parses id to delete, passed as path param, respond with all items, 
@@ -78,6 +102,27 @@ export default function WorkingWithArrays(app) {
         todos.splice(todoIndex, 1); //start index; number of items to delete
         res.json(todos);
       });
+
+      /**
+       * reimplementing delete using app.delete instead of app.get
+       * The HTTP DELETE method is specifically suited for removing data from 
+       * remote servers. In the server project, implement a better version of 
+       * the delete operation as shown below. The new implementation uses the 
+       * HTTP DELETE method declared in app.delete() which is distinct from 
+       * app.get() for which we don't need the trailing /delete at the end of 
+       * the URL. Removing the element from the array is the same either way. 
+       * Although we could again respond with the entire array of surviving 
+       * todos, it is better to just respond with a success status and let
+       *  the user interface update its state variable. This reduces unnecessary
+       *  data communication between the client and server.
+       */
+      app.delete("/lab5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todoIndex = todos.findIndex((t) => t.id === parseInt(id));
+        todos.splice(todoIndex, 1);
+        res.sendStatus(200);
+      });
+    
 
       /**
        * Update Data in Arrays:
