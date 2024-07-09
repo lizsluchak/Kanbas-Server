@@ -1,4 +1,5 @@
-[
+export default [
+
   { "_id": "A101", "title": "Propulsion Assignment", "course": "RS101", "description": "Complete the analysis on different rocket propulsion methods.", "points": "100", "dueDate": "2024-07-15", "availableDate": "2024-06-01", "availableTime": "12:00am", "dueTime": "11:59pm" },
   { "_id": "A102", "title": "Combustion Analysis", "course": "RS101", "description": "Analyze the combustion processes in various rocket engines.", "points": "100", "dueDate": "2024-07-22", "availableDate": "2024-06-01", "availableTime": "12:00am", "dueTime": "11:59pm" },
   { "_id": "A103", "title": "Nozzle Design Project", "course": "RS101", "description": "Design a nozzle for a specified rocket engine.", "points": "150", "dueDate": "2024-07-29", "availableDate": "2024-06-01", "availableTime": "12:00am", "dueTime": "11:59pm" },

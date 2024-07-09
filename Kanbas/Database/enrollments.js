@@ -1,5 +1,4 @@
 export default[ 
-    { _id: "1", user: "999", course: "RS101" },
 
   { "_id": "1", "user": "121", "course": "RS101" },
   { "_id": "2", "user": "122", "course": "RS101" },
