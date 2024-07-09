@@ -16,4 +16,19 @@ import Database from "../Database/index.js"
 
 );
 
+/**
+ * C: Create Operation for Modules
+ */
+app.post("/api/courses/:cid/modules", (req, res) => {
+    const { cid } = req.params;
+    const newModule = {
+      ...req.body,
+      course: cid,
+      _id: new Date().getTime().toString(),
+    };
+    Database.modules.push(newModule);
+    res.send(newModule);
+  });
+
+
 }
