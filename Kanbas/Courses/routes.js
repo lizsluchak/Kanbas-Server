@@ -29,4 +29,16 @@ export default function CourseRoutes(app) {
     res.send(course);
   });
 
+  /**
+   * Delete Route that parses the id of course as path param and removes
+   * corresponding course from courses array.
+   * Response = Status 204
+   */
+  app.delete("/api/courses/:id", (req, res) => {
+    const { id } = req.params;
+    Database.courses = Database.courses.filter((c) => c._id !== id);
+    res.sendStatus(204);
+  });
+
+
 }
