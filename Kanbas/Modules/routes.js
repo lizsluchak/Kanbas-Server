@@ -30,5 +30,33 @@ app.post("/api/courses/:cid/modules", (req, res) => {
     res.send(newModule);
   });
 
+/**
+ * U: Update Operation for Modules
+ * 
+ */
+  app.put("/api/modules/:mid", (req, res) => {
+    const { mid } = req.params;
+    const moduleIndex = Database.modules.findIndex(
+      (m) => m._id === mid);
+    Database.modules[moduleIndex] = {
+      ...Database.modules[moduleIndex],
+      ...req.body
+    };
+    res.sendStatus(204);
+  });
+
+
+  /**
+   * D: DELETE Operation for Modules
+   * 
+   * Uses embdedded module ID
+   */
+  app.delete("/api/modules/:mid", (req, res) => {
+    const { mid } = req.params;
+    Database.modules = Database.modules.filter((m) => m._id !== mid);
+    res.sendStatus(200);
+  });
+
+
 
 }
