@@ -8,6 +8,7 @@ import Database from "../Database/index.js"
    * @param {*} app 
    */
   export default function ModuleRoutes(app) {
+    
     app.get("/api/courses/:cid/modules", (req, res) => {
       const { cid } = req.params;
       const modules = Database.modules.filter((m) => m.course === cid);

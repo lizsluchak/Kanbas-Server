@@ -9,10 +9,11 @@
 
 import express from "express";
 import Hello from "./Hello.js";
-import Lab5 from "./Lab5/index.js" //import lab5
+import Lab5 from "./Lab5/index.js" 
 import cors from "cors";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
+import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 const app = express();
 //cors = library to configure how various resources can interact across diff origins
@@ -39,6 +40,7 @@ app.use(express.json());
 //import new routes and pass reference, must be after cors and json statements
 CourseRoutes(app);
 ModuleRoutes(app);
+AssignmentRoutes(app);
 Lab5(app); 	
 // app.use(express.json()); //create new express library instance and assigns it to app
 Hello(app);  //pass app reference to Hello function
