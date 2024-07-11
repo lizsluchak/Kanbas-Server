@@ -52,17 +52,17 @@ export default function AssignmentRoutes(app) {
     //     res.send(course);
     // });
 
-    // /**
-    //  * Delete a course:
-    //  * Parses the id of the course from the path parameter and removes the
-    //  * corresponding course from the courses array in the Database.
-    //  * Response: Status 204
-    //  */
-    // app.delete("/api/courses/:id", (req, res) => {
-    //     const { id } = req.params;
-    //     Database.courses = Database.courses.filter((c) => c._id !== id);
-    //     res.sendStatus(204);
-    // });
+    /**
+     * Delete Assignment:
+     * Parses the :aid of the course from the path parameter and removes the
+     * corresponding assignment via :aid from the courses array in the Database.
+     * Response: Status 204
+     */
+    app.delete("/api/courses/assignments/:aid", (req, res) => {
+        const { aid } = req.params;
+        Database.assignments = Database.assignments.filter((a) => a._id !== aid);
+        res.sendStatus(204);
+    });
 
     // /**
     //  * Update a course:
