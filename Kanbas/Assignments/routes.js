@@ -34,23 +34,22 @@ export default function AssignmentRoutes(app) {
     // GET all assignments
     app.get("/api/courses/:cid/assignments", (req, res) => {
         const { cid } = req.params;
-        console.log("help", cid);
         const assignments = Database.assignments.filter((a) => a.course === cid);
-        console.log(assignments)
         res.json(assignments);
     });
 
-    // /**
-    //  * Create New Course & Add to Database:
-    //  * New course is passed in the HTTP body from the client and appended to
-    //  * the end of the courses array in the Database. The course is given a new
-    //  * unique identifier and sent back to the client as a response. 
-    //  */
-    // app.post("/api/courses", (req, res) => {
-    //     const course = { ...req.body, _id: new Date().getTime().toString() };
-    //     Database.courses.push(course);
-    //     res.send(course);
-    // });
+    //CREATE new assignment via POST
+    app.post("/api/courses/:cid/assignments", (req, res) => {
+        const { cid, aid } = req.params
+        console.log("current assignmnets:", cid, aid);
+        const newAssignment = { 
+            ...req.body,
+            course: cid,  
+            _id: new Date().getTime().toString() };
+        Database.assignments.push(newAssignment);
+        console.log(newAssignment);
+        res.json(newAssignment);
+    });
 
     /**
      * Delete Assignment:
