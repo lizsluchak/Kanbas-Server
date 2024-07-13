@@ -63,18 +63,14 @@ export default function AssignmentRoutes(app) {
         res.sendStatus(204);
     });
 
-    // /**
-    //  * Update a course:
-    //  * Parses the id of the course from the path parameter and updates the
-    //  * corresponding course in the courses array in the Database.
-    //  * Response: Status 204
-    //  */
-    // app.put("/api/courses/:id", (req, res) => {
-    //     const { id } = req.params;
-    //     const course = req.body;
-    //     Database.courses = Database.courses.map((c) =>
-    //         c._id === id ? { ...c, ...course } : c
-    //     );
-    //     res.sendStatus(204); // Success
-    // });
+    //update assignment
+    app.put("/api/courses/assignments/:aid", (req, res) => {
+        const { aid } = req.params;
+        const assignment = req.body;
+        console.log(assignment);
+        Database.assignments = Database.assignments.map((a) =>
+            a._id === aid ? { ...a, ...assignment } : a
+        );
+        res.sendStatus(204); // Success
+    });
 }
