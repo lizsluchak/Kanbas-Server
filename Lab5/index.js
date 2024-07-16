@@ -15,7 +15,7 @@ import WorkingWithObjects from "./WorkingWithObjects.js";
 
 const Lab5 = (app) => {
 
-    app.get("Lab5/welcome", (req, res) => {
+    app.get("/Lab5/welcome", (req, res) => {
         res.send("Welcome to Lab 5");
     });
     PathParameters(app);

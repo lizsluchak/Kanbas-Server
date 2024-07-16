@@ -33,7 +33,6 @@ app.post("/api/courses/:cid/modules", (req, res) => {
 
 /**
  * U: Update Operation for Modules
- * 
  */
   app.put("/api/modules/:mid", (req, res) => {
     const { mid } = req.params;
