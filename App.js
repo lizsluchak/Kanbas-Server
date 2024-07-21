@@ -1,3 +1,4 @@
+import "dotenv/config";
 import mongoose from "mongoose"; //load mongoose library
 import express from "express";
 import Hello from "./Hello.js";
@@ -8,7 +9,7 @@ import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 
-const CONNECTION_STRING = "mongodb://127.0.0.1:27017/kanbas" //currently local host
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 mongoose.connect(CONNECTION_STRING); //connect function via Mongoose Libary to connect to database server programatically 
 const app = express();
 
