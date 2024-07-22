@@ -47,5 +47,13 @@ export default function UserRoutes(app) {
     res.json(status);
 };
 app.delete("/api/users/:userId", deleteUser);
+
+const updateUser = async (req, res) => {
+  const { userId } = req.params;
+  const status = await dao.updateUser(userId, req.body);
+  res.json(status);
+};
+app.put("/api/users/:userId", updateUser);
+
   
 }

@@ -45,6 +45,15 @@ export const findUsersByPartialName = (partialName) => {
 export const findUserById = (userId) => model.findById(userId);
 export const findUserByUsername = (username) =>  model.findOne({ username: username });
 export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
+
+/** UpdateUser DAO Function:
+ * updates a single document by first indentifying it by its primary key, and
+ * then updating the matching fields in the user parameter
+ * 
+ * @param {*} userId 
+ * @param {*} user 
+ * @returns 
+ */
 export const updateUser = (userId, user) =>  model.updateOne({ _id: userId }, { $set: user });
 
 /** Delete User DAO Function:
