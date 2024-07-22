@@ -8,7 +8,6 @@ import cors from "cors";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
-// import UserRoutes from "./Users/routes.js";
 import UserRoutes from "./Kanbas/Users/routes.js";
 
 
