@@ -26,6 +26,22 @@ export const findAllUsers = () => model.find();
  * @returns all users from collection that match Role given
  */
 export const findUsersByRole = (role) => model.find({ role: role }); // or just model.find({ role })
+
+/**
+ * findUsersByPartialName DAO Function:
+ * filters users by their first or last name by creating a regular expression
+ * uses to pattern match the firstname or lastname fiels fo the documents in the
+ * users collection
+ * @param {*} partialName 
+ * @returns 
+ */
+export const findUsersByPartialName = (partialName) => {
+    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive ????????
+    return model.find({
+      $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+    });
+  };
+  
 export const findUserById = (userId) => model.findById(userId);
 export const findUserByUsername = (username) =>  model.findOne({ username: username });
 export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
