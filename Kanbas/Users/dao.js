@@ -14,6 +14,18 @@ export const createUser = (user) => {} // implemented later
  */
 export const findAllUsers = () => model.find();
 
+/**
+ * findUsersByRole DAO function:
+ * Filters the mondgoDB users collection by the role property. Mongoose model's
+ * find function can also take as argument a JSON object used to pattern match
+ * documents in the collection. 
+ * 
+ * The {role: role} object means that documents will be filtered by their 
+ * role property that matches the value role.
+ * @param {*} role Role looking to filter users by
+ * @returns all users from collection that match Role given
+ */
+export const findUsersByRole = (role) => model.find({ role: role }); // or just model.find({ role })
 export const findUserById = (userId) => model.findById(userId);
 export const findUserByUsername = (username) =>  model.findOne({ username: username });
 export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
