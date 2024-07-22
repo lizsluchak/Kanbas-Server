@@ -46,4 +46,10 @@ export const findUserById = (userId) => model.findById(userId);
 export const findUserByUsername = (username) =>  model.findOne({ username: username });
 export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
 export const updateUser = (userId, user) =>  model.updateOne({ _id: userId }, { $set: user });
+
+/** Delete User DAO Function:
+ * Removes a single user in users collection based on primary key
+ * @param {*} userId 
+ * @returns 
+ */
 export const deleteUser = (userId) => model.deleteOne({ _id: userId });

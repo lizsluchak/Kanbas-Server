@@ -33,5 +33,19 @@ export default function UserRoutes(app) {
     res.json(user);
   };
   app.get("/api/users/:userId", findUserById);
+
+
+  /** Delete User Route: 
+   * makes deleteUser opeartion available as a RESTful Web API for integration
+   * with the user interface which encodes the id of the user to remove as a
+   * path parameter
+   * @param {*} req 
+   * @param {*} res 
+   */
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
+};
+app.delete("/api/users/:userId", deleteUser);
   
 }
