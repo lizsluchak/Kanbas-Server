@@ -55,5 +55,12 @@ const updateUser = async (req, res) => {
 };
 app.put("/api/users/:userId", updateUser);
 
+const createUser = async (req, res) => {
+  const user = await dao.createUser(req.body);
+  res.json(user);
+};
+app.post("/api/users", createUser);
+
+
   
 }

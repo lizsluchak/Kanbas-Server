@@ -4,7 +4,11 @@ import model from "./model.js";
  * DAO: DAOs implement high level data operations based on lower level Mongoose models.
  */
 
-export const createUser = (user) => {} // implemented later
+export const createUser = (user) => {
+    delete user._id
+    return model.create(user);
+  }
+  
 
 /**
  * findAllUsers DAO function: 
