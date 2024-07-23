@@ -11,7 +11,7 @@ import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import UserRoutes from "./Kanbas/Users/routes.js";
 
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
 mongoose.connect(CONNECTION_STRING); //connect function via Mongoose Libary to connect to database server programatically 
 const app = express();
 
