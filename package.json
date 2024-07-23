@@ -8,7 +8,7 @@
   
   "description": "Node.js HTTP Web server for the Kanbas application",
   
-  "main": "(index.js)",
+  "main": "index.js",
   
   "scripts": {
   
