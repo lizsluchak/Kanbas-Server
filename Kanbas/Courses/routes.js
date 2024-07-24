@@ -17,6 +17,13 @@ export default function CourseRoutes(app) {
   };
   app.get("/api/courses", findAllCourses);
 
+
+  const createCourse = async (req, res) => {
+    const course = await dao.createCourse(req.body);
+    res.json(course);
+  };
+  app.post("/api/courses", createCourse);
+
 }
 
 
@@ -38,18 +45,18 @@ export default function CourseRoutes(app) {
 //     res.send(courses);
 //   });
 
-//   /**
-//    * Create New Course & Add to Database:
-//    * New course is passed in the HTTP body from the client is appeneded to
-//    * the end of the courses array in the Dashboard. Course is given new
-//    * unique identifier and sent back to client as response. 
-//    */
-//   app.post("/api/courses", (req, res) => {
-//     const course = { ...req.body,
-//       _id: new Date().getTime().toString() };
-//     Database.courses.push(course);
-//     res.send(course);
-//   });
+  // /**
+  //  * Create New Course & Add to Database:
+  //  * New course is passed in the HTTP body from the client is appeneded to
+  //  * the end of the courses array in the Dashboard. Course is given new
+  //  * unique identifier and sent back to client as response. 
+  //  */
+  // app.post("/api/courses", (req, res) => {
+  //   const course = { ...req.body,
+  //     _id: new Date().getTime().toString() };
+  //   Database.courses.push(course);
+  //   res.send(course);
+  // });
 
 //   /**
 //    * Delete Route that parses the id of course as path param and removes

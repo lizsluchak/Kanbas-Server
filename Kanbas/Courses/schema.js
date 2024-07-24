@@ -5,16 +5,23 @@ import mongoose from "mongoose"; //load mongoose library
  * As a nonrelational database, it is the applications responsiblity to define data structure
  */
 const courseSchema = new mongoose.Schema({
-    _id: { type: String, required: true, unique: true },
     name: String,
     number: String, 
     startDate: String,
     endDate: String,
     department: Date,
     credits: Number,
-    image_url: String, 
     description: String, 
   },
   { collection: "courses" } //store in coursesCollection
 );
 export default courseSchema;
+
+
+// Or by using the virtual method as following:
+courseSchema.virtual('image_url').get(function() {
+  const imageURL = '/images/' + this.number + ".jpg";
+  console.log(imageURL);
+  return imageURL
+});
+
