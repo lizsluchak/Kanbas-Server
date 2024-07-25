@@ -12,16 +12,10 @@ const courseSchema = new mongoose.Schema({
     department: Date,
     credits: Number,
     description: String, 
+    image_url: String, 
   },
   { collection: "courses" } //store in coursesCollection
 );
 export default courseSchema;
 
-
-// Or by using the virtual method as following:
-courseSchema.virtual('image_url').get(function() {
-  const imageURL = '/images/' + this.number + ".jpg";
-  console.log(imageURL);
-  return imageURL
-});
 
