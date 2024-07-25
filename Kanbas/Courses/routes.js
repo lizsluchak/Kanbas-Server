@@ -24,7 +24,7 @@ export default function CourseRoutes(app) {
   };
   app.post("/api/courses", createCourse);
 
-}
+
 
 
 // import Database from "../Database/index.js"
@@ -58,37 +58,28 @@ export default function CourseRoutes(app) {
   //   res.send(course);
   // });
 
-//   /**
-//    * Delete Route that parses the id of course as path param and removes
-//    * corresponding course from courses array.
-//    * Response = Status 204
-//    */
-//   app.delete("/api/courses/:id", (req, res) => {
-//     const { id } = req.params;
-//     Database.courses = Database.courses.filter((c) => c._id !== id);
-//     res.sendStatus(204);
-//   });
-
-//   /**
-//    * Update Route
-//    */
-//   app.put("/api/courses/:id", (req, res) => {
-//     const { id } = req.params;
-//     const course = req.body;
-//     Database.courses = Database.courses.map((c) =>
-//       c._id === id ? { ...c, ...course } : c
-      
-//     );
-//     // console.log(Database.courses);
-//     res.sendStatus(204); //success
-//   });
-
-
-
+  /**
+   * Delete Route that parses the id of course as path param and removes
+   * corresponding course from courses array.
+   * Response = Status 204
+   */
+  const deleteCourseROUTE = async (req,res) => {
+    const status = await dao.deleteCourseDAO(req.params.courseId);
+    res.json(status);
+  }
+  app.delete("/api/courses/:courseId", deleteCourseROUTE);
   
 
 
 
+  /**
+   * Update Route
+   */
+  const updateCourseROUTE = async (req,res) => {
+    const status = await dao.updateCourseDAO(courseId, req.body);
+    res.json(status);
+  };
+  app.put("/api/courses/:courseId", updateCourseROUTE); 
+      
 
-
-// }
+}
