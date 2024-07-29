@@ -1,20 +1,17 @@
 import model from "./model.js";
 
 
-
-
-//CREATE Course Route
+//CREATE Course DAO Route
 export const createCourse = (course) => {return model.create(course)};
 
 
-//RETRIEVE Course Route
+//RETRIEVE Course DAO Route
 export const findAllCourses = () => model.find();
 
 
-//UPDATE Course Route
+//UPDATE Course DAO Route
 export const updateCourseDAO = (courseId, course) => model.updateOne({ _id: courseId}, {$set: course});
 
 
-
-//DELETE Course Route
+//DELETE Course DAO Route
 export const deleteCourseDAO = (courseId) => model.deleteOne({ _id: courseId});
