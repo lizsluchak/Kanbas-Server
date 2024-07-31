@@ -6,7 +6,7 @@ export const createModuleDAO = (module) => {return model.create(module)};
 
 
 //RETRIEVE MODULE DAO Route
-export const findAllModulesDAO = () => model.find();
+export const findAllModulesDAO = (course) => model.find({ course });
 
 
 //UPDATE MODULE DAO Route

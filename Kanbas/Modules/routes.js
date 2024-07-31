@@ -12,10 +12,10 @@ import * as dao from "./dao.js";
   export default function ModuleRoutes(app) {
 
     const findAllModulesROUTE = async (req, res) => {
-      const modules = await dao.findAllModulesDAO();
+      const modules = await dao.findAllModulesDAO(req.params.courseId);
       res.json(modules);
     };
-    app.get("/api/modules", findAllModulesROUTE);
+    app.get("/api/modules/:courseId", findAllModulesROUTE);
 
 
 
