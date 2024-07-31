@@ -2,7 +2,10 @@ import model from "./model.js";
 
 
 //CREATE MODULE DAO Route
-export const createModuleDAO = (module) => {return model.create(module)};
+export const createModuleDAO = (module) => {
+    delete module._id
+    return model.create(module)
+};
 
 
 //RETRIEVE MODULE DAO Route
