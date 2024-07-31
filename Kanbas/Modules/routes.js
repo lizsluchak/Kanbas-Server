@@ -1,4 +1,6 @@
 import Database from "../Database/index.js"
+import * as dao from "./dao.js";
+
  /**
    * R: Retrieve/Read Operation for Modules of Selected Course
    * 
@@ -8,14 +10,22 @@ import Database from "../Database/index.js"
    * @param {*} app 
    */
   export default function ModuleRoutes(app) {
-    
-    app.get("/api/courses/:cid/modules", (req, res) => {
-      const { cid } = req.params;
-      const modules = Database.modules.filter((m) => m.course === cid);
-      res.json(modules);
-    }
 
-);
+    const findAllModulesROUTE = async (req, res) => {
+      const modules = await dao.findAllModulesDAO();
+      res.json(modules);
+    };
+    app.get("/api/modules", findAllModulesROUTE);
+
+
+
+    
+//     app.get("/api/courses/:cid/modules", (req, res) => {
+//       const { cid } = req.params;
+//       const modules = Database.modules.filter((m) => m.course === cid);
+//       res.json(modules);
+//     }
+// );
 
 /**
  * C: Create Operation for Modules
