@@ -1,68 +1,103 @@
 import model from "./model.js";
 
 /**
- * DAO: DAOs implement high level data operations based on lower level Mongoose models.
+ * Data Access Object (DAO) module for performing CRUD operations on User data.
+ * Utilizes a Mongoose model for interacting with a MongoDB database.
  */
 
+
+// ====================================================
+// CREATE OPERATIONS
+// ====================================================
+
+/**
+ * Creates a new user in the Users collection.
+ * @param {Object} user - The user object to be created, without an `_id` field.
+ * @returns {Promise<Object>} The created user document.
+ */
 export const createUser = (user) => {
-    delete user._id
-    return model.create(user);
-  }
-  
+  delete user._id;
+  return model.create(user);
+};
+
+// ====================================================
+// READ OPERATIONS
+// ====================================================
 
 /**
- * findAllUsers DAO function: 
- * Retrieves all users from Users MongoDB Collection. Uses Mongoose model 
- * ~find~ function which retrieves all documents from a collection
- * @returns all users from Users collection 
+ * Retrieves all users from the Users collection.
+ * @returns {Promise<Array>} An array of all user documents.
  */
-export const findAllUsers = () => model.find();
+export const findAllUsers = () => 
+  model.find();
 
 /**
- * findUsersByRole DAO function:
- * Filters the mondgoDB users collection by the role property. Mongoose model's
- * find function can also take as argument a JSON object used to pattern match
- * documents in the collection. 
- * 
- * The {role: role} object means that documents will be filtered by their 
- * role property that matches the value role.
- * @param {*} role Role looking to filter users by
- * @returns all users from collection that match Role given
+ * Retrieves users from the Users collection filtered by role.
+ * @param {string} role - The role to filter users by.
+ * @returns {Promise<Array>} An array of user documents that match the specified role.
  */
-export const findUsersByRole = (role) => model.find({ role: role }); // or just model.find({ role })
+export const findUsersByRole = (role) => 
+  model.find({ role });
 
 /**
- * findUsersByPartialName DAO Function:
- * filters users by their first or last name by creating a regular expression
- * uses to pattern match the firstname or lastname fiels fo the documents in the
- * users collection
- * @param {*} partialName 
- * @returns 
+ * Retrieves users with a first or last name matching the given partial name.
+ * Uses a case-insensitive regular expression for matching.
+ * @param {string} partialName - The partial name to search for.
+ * @returns {Promise<Array>} An array of user documents with matching names.
  */
 export const findUsersByPartialName = (partialName) => {
-    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive ????????
-    return model.find({
-      $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
-    });
-  };
-  
-export const findUserById = (userId) => model.findById(userId);
-export const findUserByUsername = (username) =>  model.findOne({ username: username });
-export const findUserByCredentials = (username, password) =>  model.findOne({ username, password });
+  const regex = new RegExp(partialName, "i"); // 'i' flag for case-insensitivity
+  return model.find({
+    $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+  });
+};
 
-/** UpdateUser DAO Function:
- * updates a single document by first indentifying it by its primary key, and
- * then updating the matching fields in the user parameter
- * 
- * @param {*} userId 
- * @param {*} user 
- * @returns 
+/**
+ * Retrieves a user by their unique identifier.
+ * @param {string} userId - The unique identifier of the user.
+ * @returns {Promise<Object>} The user document, if found.
  */
-export const updateUser = (userId, user) =>  model.updateOne({ _id: userId }, { $set: user });
+export const findUserById = (userId) => 
+  model.findById(userId);
 
-/** Delete User DAO Function:
- * Removes a single user in users collection based on primary key
- * @param {*} userId 
- * @returns 
+/**
+ * Retrieves a user by their username.
+ * @param {string} username - The username of the user.
+ * @returns {Promise<Object>} The user document, if found.
  */
-export const deleteUser = (userId) => model.deleteOne({ _id: userId });
+export const findUserByUsername = (username) =>
+  model.findOne({ username });
+
+/**
+ * Retrieves a user by their username and password.
+ * @param {string} username - The username of the user.
+ * @param {string} password - The password of the user.
+ * @returns {Promise<Object>} The user document, if found.
+ */
+export const findUserByCredentials = (username, password) =>
+  model.findOne({ username, password });
+
+// ====================================================
+// UPDATE OPERATIONS
+// ====================================================
+
+/**
+ * Updates a user's details identified by their unique identifier.
+ * @param {string} userId - The unique identifier of the user.
+ * @param {Object} user - The user object containing updated fields.
+ * @returns {Promise<Object>} The result of the update operation.
+ */
+export const updateUser = (userId, user) =>
+  model.updateOne({ _id: userId }, { $set: user });
+
+// ====================================================
+// DELETE OPERATIONS
+// ====================================================
+
+/**
+ * Deletes a user from the Users collection based on their unique identifier.
+ * @param {string} userId - The unique identifier of the user.
+ * @returns {Promise<Object>} The result of the delete operation.
+ */
+export const deleteUser = (userId) =>
+  model.deleteOne({ _id: userId });
