@@ -26,10 +26,28 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/signin", signin);
 
+  /**
+   * Gives access to current user
+   * @param {*} req 
+   * @param {*} res 
+   */
   const profile = async (req, res) => {
     res.json(currentUser);
   };
   app.post("/api/users/profile", profile);
+
+  
+  const signup = async (req, res) => {
+    const user = await dao.findUserByUsername(req.body.username);
+    if (user) {
+      res.status(400).json(
+        { message: "Username already taken" });
+      return;
+    }
+    currentUser = await dao.createUser(req.body);
+    res.json(currentUser);
+  };
+  app.post("/api/users/signup", signup);
 
 
   // ====================================================
