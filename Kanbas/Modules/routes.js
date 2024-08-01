@@ -18,12 +18,31 @@ import * as dao from "./dao.js";
     };
     app.post("/api/modules/:courseId", createModuleROUTE);
 
+
     const retrieveAllModulesROUTE = async (req, res) => {
       const {courseId} = req.params; 
       const modules = await dao.findAllModulesDAO(courseId);
       res.json(modules);
     };
     app.get("/api/modules/:courseId", retrieveAllModulesROUTE);
+
+    const updateModuleROUTE = async (req, res) => {
+      const { moduleId } = req.params;
+      const status = await dao.updateModuleDAO(moduleId, req.body);
+      res.json(status);
+    };
+    app.put("/api/modules/:moduleId", updateModuleROUTE);
+
+
+    const deleteModuleROUTE = async (req, res) => {
+      const { moduleId } = req.params;
+      console.log(moduleId);
+      console.log("hi", moduleId);
+      const status = await dao.deleteModuleDAO(moduleId);
+      res.json(status);
+    };
+  
+    app.delete("/api/modules/:moduleId", deleteModuleROUTE);
 
 
 
