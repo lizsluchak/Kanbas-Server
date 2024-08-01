@@ -26,6 +26,12 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/signin", signin);
 
+  const profile = async (req, res) => {
+    res.json(currentUser);
+  };
+  app.post("/api/users/profile", profile);
+
+
   // ====================================================
   // CREATE SERVER ROUTES
   // ====================================================
