@@ -61,7 +61,6 @@ export default function UserRoutes(app) {
   app.post("/api/users/signup", signup);
 
   const signout = (req, res) => {
-    currentUser = null;
     req.session.destroy();
     res.sendStatus(200);
   };
