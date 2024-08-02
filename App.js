@@ -1,6 +1,6 @@
 import "dotenv/config";
 import mongoose from "mongoose"; //load mongoose library
-
+import session from "express-session"; //import new server session library
 import express from "express";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js" 
@@ -15,8 +15,32 @@ const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.
 mongoose.connect(CONNECTION_STRING); //connect function via Mongoose Libary to connect to database server programatically 
 const app = express();
 
-app.use(cors());
-app.use(express.json()); 
+
+app.use(cors({
+    credentials: true, //support cookies
+    origin: process.env.NETLIFY_URL || "http://localhost:3000", //restrict cross origin resource; use different url for dev vs production
+  }
+ ));
+ app.use(express.json()); 
+ 
+ //configure server sessions after cors
+ const sessionOptions = { //default session config that works locally but would need to be tweaked for remote server
+    secret: "any string",
+    resave: false,
+    saveUninitialized: false,
+  };
+  if (process.env.NODE_ENV !== "development") { //in production trun on proxy suuport & configure cookies for remote server
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+      sameSite: "none",
+      secure: true,
+      domain: process.env.NODE_SERVER_DOMAIN,
+    };
+  }
+  app.use(session(sessionOptions));
+  
+  
+
 
 UserRoutes(app);
 CourseRoutes(app);
