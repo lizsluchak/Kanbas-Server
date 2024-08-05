@@ -19,8 +19,12 @@ const app = express();
 app.use(cors({
     credentials: true, //support cookies
     origin: process.env.NETLIFY_URL || "http://localhost:3000", //restrict cross origin resource; use different url for dev vs production
+    
   }
- ));
+  
+ )
+);
+
  app.use(express.json()); 
  
  //configure server sessions after cors
