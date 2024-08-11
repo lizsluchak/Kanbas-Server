@@ -19,11 +19,17 @@ export default function QuizRoutes(app) {
   // ====================================================
 
   const findAllQuizzes_sROUTE = async (req, res) => {
-    const { course } = req.query;
+    const { course, search } = req.query;
     if (course) {
       const quizzes = await dao.findQuizzesByCourse_DAO(course);
       res.json(quizzes);
       return;
+    }
+
+    if (search) {
+        const quizzes = await dao.findQuizzesByPartialName_DAO(search);
+        res.json(quizzes);
+        return;
     }
 
     const quizzes = await dao.findAllQuizzes_DAO();
