@@ -64,7 +64,7 @@ export default function QuizRoutes(app) {
   app.put("/api/quizzes/:quizId", updateQuiz_sROUTE);
 
   // ====================================================
-  // DELETE SERVER ROUTES
+  // DELETE QUIZ SERVER ROUTES
   // ====================================================
 
   /**
