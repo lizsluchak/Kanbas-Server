@@ -44,7 +44,9 @@ export default function QuizRoutes(app) {
    * @param {Object} res - The response object.
    */
   const findQuizById_sROUTE = async (req, res) => {
+    console.log(req.params.quizId);
     const quiz = await dao.findQuizById_DAO(req.params.quizId);
+    console.log(quiz);
     res.json(quiz);
   };
   app.get("/api/quizzes/:quizId", findQuizById_sROUTE);
@@ -57,7 +59,8 @@ export default function QuizRoutes(app) {
   // ====================================================
 
   const updateQuiz_sROUTE = async (req, res) => {
-    const { quizId } = req.params;
+    const { quizId } = req.body;
+    console.log(quizId);
     const status = await dao.updateQuiz_DAO(quizId, req.body);
     res.json(status);
   };

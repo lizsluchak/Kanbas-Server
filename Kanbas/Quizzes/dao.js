@@ -11,7 +11,6 @@ import model from "./model.js";
 // ====================================================
 
 export const createQuiz_DAO = (quiz) => {
-    delete quiz._id; 
     return model.create(quiz)
 };
 
@@ -40,7 +39,8 @@ export const findQuizzesByPartialName_DAO = (partialName) => {
 
 
 export const findQuizById_DAO = ( quizId ) => 
-  model.findById( quizId);
+  // console.log(quizId);
+  model.findById(quizId);
 
 
 // ====================================================
