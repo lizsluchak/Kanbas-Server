@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({ //create schema to describe structure o
     section: String,
     lastActivity: Date,
     totalActivity: String,
+    enrolledCourses: Array, 
   },
   { collection: "users" } //store in usersCollection
 );
