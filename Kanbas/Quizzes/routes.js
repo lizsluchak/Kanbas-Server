@@ -60,7 +60,8 @@ export default function QuizRoutes(app) {
   // ====================================================
 
   const updateQuiz_sROUTE = async (req, res) => {
-    const { quizId } = req.body;
+    console.log(req.params.quizId);
+    const quizId = req.params.quizId;
     console.log("quizId passed", quizId);
     const status = await dao.updateQuiz_DAO(quizId, req.body);
     res.json(status);
