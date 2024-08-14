@@ -24,6 +24,7 @@ const quizSchema = new mongoose.Schema({
     availableTime: String, 
     dueTime: String, 
     untilDate: String,
+    published: String, 
   },
   { collection: "quizzes" } //store in coursesCollection
 );
