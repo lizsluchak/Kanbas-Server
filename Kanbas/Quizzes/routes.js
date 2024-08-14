@@ -9,9 +9,10 @@ export default function QuizRoutes(app) {
 
   const createQuiz_sROUTE = async (req, res) => {
     const newQuiz = await dao.createQuiz_DAO(req.body);
-    res.json(quiz);
+    console.log(newQuiz); 
+    res.json(newQuiz);
   };
-  app.post("/api/quizzes/:quizId", createQuiz_sROUTE);
+  app.post("/api/quizzes", createQuiz_sROUTE);
 
 
   // ====================================================
@@ -60,7 +61,7 @@ export default function QuizRoutes(app) {
 
   const updateQuiz_sROUTE = async (req, res) => {
     const { quizId } = req.body;
-    console.log(quizId);
+    console.log("quizId passed", quizId);
     const status = await dao.updateQuiz_DAO(quizId, req.body);
     res.json(status);
   };
